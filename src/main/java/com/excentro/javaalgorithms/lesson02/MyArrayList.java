@@ -7,7 +7,10 @@ public class MyArrayList<T extends Comparable<T>> {
   private final T[] list;
   private int size = 0;
 
-  public MyArrayList(int capacity) {
+  /**
+   * Конструктор.
+   */
+  public MyArrayList(final int capacity) {
     if (capacity < 0) {
       throw new IllegalArgumentException("capacity : " + capacity);
     }
@@ -18,26 +21,28 @@ public class MyArrayList<T extends Comparable<T>> {
     list = (T[]) new Comparable[DEFAULT_CAPACITY];
   }
 
-  public void add(T item) {
+  public void add(final T item) {
     list[size] = item;
     size++;
   }
 
-  public void add(int index, T item) {
+  public void add(final int index, final T item) {
     checkCorrectIndex(index);
 
-    if (size - index >= 0) System.arraycopy(list, index, list, index + 1, size - index);
+    if (size - index >= 0) {
+      System.arraycopy(list, index, list, index + 1, size - index);
+    }
     list[index] = item;
     size++;
   }
 
-  private void checkCorrectIndex(int index) {
+  private void checkCorrectIndex(final int index) {
     if (index < 0 || index > size) {
       throw new IllegalArgumentException("no correct index" + index);
     }
   }
 
-  public boolean remove(T item) {
+  public boolean remove(final T item) {
     int i = 0;
     while (i < size && !list[i].equals(item)) {
       i++;
@@ -45,18 +50,20 @@ public class MyArrayList<T extends Comparable<T>> {
     if (i == size) {
       return false;
     }
-    if (size - 1 - i >= 0) System.arraycopy(list, i + 1, list, i, size - 1 - i);
+    if (size - 1 - i >= 0) {
+      System.arraycopy(list, i + 1, list, i, size - 1 - i);
+    }
     size--;
     list[size] = null;
     return true;
   }
 
-  public T get(int index) {
+  public T get(final int index) {
     checkCorrectIndex(index);
     return list[index];
   }
 
-  public void set(int index, T item) {
+  public void set(final int index, final T item) {
     checkCorrectIndex(index);
     list[index] = item;
   }
@@ -65,11 +72,11 @@ public class MyArrayList<T extends Comparable<T>> {
     return size;
   }
 
-  public boolean contains(T item) {
+  public boolean contains(final T item) {
     return indexOf(item) > -1;
   }
 
-  public final int indexOf(T item) {
+  public final int indexOf(final T item) {
     for (int i = 0; i < size; i++) {
       if (list[i].equals(item)) {
         return i;
@@ -80,7 +87,7 @@ public class MyArrayList<T extends Comparable<T>> {
 
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder("[ ");
+    final StringBuilder sb = new StringBuilder("[ ");
     for (int i = 0; i < size; i++) {
       sb.append(list[i]).append(", ");
     }
@@ -101,12 +108,12 @@ public class MyArrayList<T extends Comparable<T>> {
     }
   }
 
-  private boolean less(T item1, T item2) {
+  private boolean less(final T item1, final T item2) {
     return item1.compareTo(item2) < 0;
   }
 
-  private void swap(int index1, int index2) {
-    T temp = list[index1];
+  private void swap(final int index1, final int index2) {
+    final T temp = list[index1];
     list[index1] = list[index2];
     list[index2] = temp;
   }
@@ -140,7 +147,7 @@ public class MyArrayList<T extends Comparable<T>> {
     }
   }
 
-  public void bubbleSort(Comparator<T> comparator) {
+  public void bubbleSort(final Comparator<T> comparator) {
     boolean isSwapped;
     for (int i = size - 1; i > 0; i--) {
       isSwapped = false;
