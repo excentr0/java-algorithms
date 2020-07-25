@@ -1,5 +1,6 @@
 package com.excentro.javaalgorithms.lesson02;
 
+import java.util.Comparator;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -16,10 +17,11 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Main {
   /** Main class. */
   public static void main(final String[] args) {
+    int capacity = 100_000;
 
     // Создаем массив
     final MyArrayList<Integer> arr = new MyArrayList<>();
-    for (int i = 0; i < 100_000; i++) {
+    for (int i = 0; i < capacity; i++) {
       arr.add(ThreadLocalRandom.current().nextInt(100));
     }
     // копируем массивы
@@ -29,11 +31,20 @@ public class Main {
     bubbleSort(arr);
     selectionSort(arr2);
     insertionSort(arr3);
+
+    MyArrayList<Integer> smallArr = new MyArrayList<>(10);
+    smallArr.add(0, 100);
+    for (int i = 0; i < 100; i++) {
+      smallArr.add(i);
+      System.out.printf(
+          "Current smallArr capacity=%d, size=%d%n", smallArr.length(), smallArr.size());
+      System.out.println(smallArr);
+    }
   }
 
   private static void bubbleSort(MyArrayList<Integer> arr) {
     long startTime = System.currentTimeMillis();
-    arr.bubbleSort();
+    arr.bubbleSort(Comparator.naturalOrder());
     long stopTime = System.currentTimeMillis();
     long elapsedTime = stopTime - startTime;
     System.out.println("BubbleSort time: " + elapsedTime);

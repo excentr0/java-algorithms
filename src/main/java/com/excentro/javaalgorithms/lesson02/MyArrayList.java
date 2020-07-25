@@ -2,6 +2,10 @@ package com.excentro.javaalgorithms.lesson02;
 
 import java.util.Comparator;
 
+/**
+ * 4*. Добавить метод увеличивающий внутренний массив и сделать рефакторинг методов add(T item ) и
+ * add(int index, T item)
+ */
 public class MyArrayList<T extends Comparable<T>> {
   private static final int DEFAULT_CAPACITY = 100_000;
   private T[] list;
@@ -30,8 +34,22 @@ public class MyArrayList<T extends Comparable<T>> {
   }
 
   public void add(final T item) {
+    checkAndIncreaseCapacity();
     list[size] = item;
     size++;
+  }
+
+  /** Проверяет текущую емкость массива и увеличивает ее, если надо */
+  private void checkAndIncreaseCapacity() {
+    if ((float) size / list.length > 0.75) {
+      T[] newList = (T[]) new Comparable[size * 2];
+      System.arraycopy(list, 0, newList, 0, list.length);
+      list = newList;
+    }
+  }
+
+  public int length() {
+    return list.length;
   }
 
   /**
@@ -42,6 +60,7 @@ public class MyArrayList<T extends Comparable<T>> {
    */
   public void add(final int index, final T item) {
     checkCorrectIndex(index);
+    checkAndIncreaseCapacity();
 
     if (size - index >= 0) {
       System.arraycopy(list, index, list, index + 1, size - index);
