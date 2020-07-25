@@ -4,12 +4,10 @@ import java.util.Comparator;
 
 public class MyArrayList<T extends Comparable<T>> {
   private static final int DEFAULT_CAPACITY = 100_000;
-  private final T[] list;
+  private T[] list;
   private int size = 0;
 
-  /**
-   * Конструктор.
-   */
+  /** Конструктор. */
   public MyArrayList(final int capacity) {
     if (capacity < 0) {
       throw new IllegalArgumentException("capacity : " + capacity);
@@ -17,13 +15,18 @@ public class MyArrayList<T extends Comparable<T>> {
     list = (T[]) new Comparable[capacity];
   }
 
-  /** Copy constructor. */
-  public MyArrayList(MyArrayList<T> arr) {
-    list = arr.list;
-  }
-
   public MyArrayList() {
     list = (T[]) new Comparable[DEFAULT_CAPACITY];
+  }
+
+  /** Copy constructor. */
+  public MyArrayList(MyArrayList<T> arr) {
+    this.list = arr.list.clone();
+    this.size = arr.size();
+  }
+
+  public int size() {
+    return size;
   }
 
   public void add(final T item) {
@@ -31,12 +34,11 @@ public class MyArrayList<T extends Comparable<T>> {
     size++;
   }
 
-
   /**
    * Добавляет элемент.
    *
    * @param index позиция
-   * @param item  эелемент
+   * @param item элемент
    */
   public void add(final int index, final T item) {
     checkCorrectIndex(index);
@@ -85,10 +87,6 @@ public class MyArrayList<T extends Comparable<T>> {
     list[index] = item;
   }
 
-  public int size() {
-    return size;
-  }
-
   public boolean contains(final T item) {
     return indexOf(item) > -1;
   }
@@ -119,9 +117,7 @@ public class MyArrayList<T extends Comparable<T>> {
     return sb.toString();
   }
 
-  /**
-   * Сортировка выбором.
-   */
+  /** Сортировка выбором. */
   public void selectionSort() {
     for (int i = 0; i < size - 1; i++) {
       int nimElem = i;
@@ -144,9 +140,7 @@ public class MyArrayList<T extends Comparable<T>> {
     list[index2] = temp;
   }
 
-  /**
-   * Сортировка вставками.
-   */
+  /** Сортировка вставками. */
   public void insertionSort() {
     T key;
     for (int i = 1; i < size; i++) {
