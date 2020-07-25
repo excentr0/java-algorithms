@@ -11,7 +11,6 @@ public class MyArrayList<T extends Comparable<T>> {
   private T[] list;
   private int size = 0;
 
-
   /**
    * Конструктор.
    */
@@ -26,20 +25,15 @@ public class MyArrayList<T extends Comparable<T>> {
     list = (T[]) new Comparable[DEFAULT_CAPACITY];
   }
 
-
   /** Copy constructor. */
   public MyArrayList(MyArrayList<T> arr) {
     this.list = arr.list.clone();
     this.size = arr.size();
   }
 
-  public int size() {
-    return size;
-  }
-
   /**
    * Добавляет элемент в список.
-   * 
+   *
    * @param item элемент
    */
   public void add(final T item) {
@@ -48,7 +42,7 @@ public class MyArrayList<T extends Comparable<T>> {
     size++;
   }
 
-
+  /**
    * Добавляет элемент.
    *
    * @param index позиция
@@ -65,7 +59,6 @@ public class MyArrayList<T extends Comparable<T>> {
     size++;
   }
 
-
   /** Проверяет текущую емкость массива и увеличивает ее, если надо. */
   private void checkAndIncreaseCapacity() {
     if ((float) size / list.length > 0.75) {
@@ -78,8 +71,6 @@ public class MyArrayList<T extends Comparable<T>> {
   public int length() {
     return list.length;
   }
-
-
 
   private void checkCorrectIndex(final int index) {
     if (index < 0 || index > size) {
@@ -118,16 +109,13 @@ public class MyArrayList<T extends Comparable<T>> {
     list[index] = item;
   }
 
-
   public int size() {
     return size;
   }
 
-
   public boolean contains(final T item) {
     return indexOf(item) > -1;
   }
-
 
   /**
    * Находит индекс элемента.
@@ -191,7 +179,6 @@ public class MyArrayList<T extends Comparable<T>> {
     list[index2] = temp;
   }
 
-
   /** Сортировка вставками. */
   public void insertionSort() {
     T key;
@@ -205,8 +192,6 @@ public class MyArrayList<T extends Comparable<T>> {
       list[j] = key;
     }
   }
-
-
 
   /** Сортировка вставками. */
   public void insertionSort(final Comparator<T> comparator) {
@@ -238,7 +223,6 @@ public class MyArrayList<T extends Comparable<T>> {
       }
     }
   }
-
 
   /**
    * Пузырьковая сортировка с компаратором.
