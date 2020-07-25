@@ -20,10 +20,7 @@ public class Main {
     int capacity = 100_000;
 
     // Создаем массив
-    final MyArrayList<Integer> arr = new MyArrayList<>();
-    for (int i = 0; i < capacity; i++) {
-      arr.add(ThreadLocalRandom.current().nextInt(100));
-    }
+    final MyArrayList<Integer> arr = createArray(capacity);
     // копируем массивы
     final MyArrayList<Integer> arr2 = new MyArrayList<>(arr);
     final MyArrayList<Integer> arr3 = new MyArrayList<>(arr);
@@ -40,6 +37,14 @@ public class Main {
           "Current smallArr capacity=%d, size=%d%n", smallArr.length(), smallArr.size());
       System.out.println(smallArr);
     }
+  }
+
+  private static MyArrayList<Integer> createArray(int capacity) {
+    final MyArrayList<Integer> arr = new MyArrayList<>();
+    for (int i = 0; i < capacity; i++) {
+      arr.add(ThreadLocalRandom.current().nextInt(100));
+    }
+    return arr;
   }
 
   private static void bubbleSort(MyArrayList<Integer> arr) {

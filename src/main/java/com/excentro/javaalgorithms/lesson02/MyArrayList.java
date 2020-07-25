@@ -159,6 +159,19 @@ public class MyArrayList<T extends Comparable<T>> {
     list[index2] = temp;
   }
 
+  /** Сортировка выбором. */
+  public void selectionSort(final Comparator<T> comparator) {
+    for (int i = 0; i < size - 1; i++) {
+      int nimElem = i;
+      for (int j = i + 1; j < size; j++) {
+        if (comparator.compare(list[j], list[nimElem]) < 0) {
+          nimElem = j;
+        }
+      }
+      swap(i, nimElem);
+    }
+  }
+
   /** Сортировка вставками. */
   public void insertionSort() {
     T key;
@@ -166,6 +179,20 @@ public class MyArrayList<T extends Comparable<T>> {
       int j = i;
       key = list[i];
       while (j > 0 && less(key, list[j - 1])) {
+        list[j] = list[j - 1];
+        j--;
+      }
+      list[j] = key;
+    }
+  }
+
+  /** Сортировка вставками. */
+  public void insertionSort(final Comparator<T> comparator) {
+    T key;
+    for (int i = 1; i < size; i++) {
+      int j = i;
+      key = list[i];
+      while (j > 0 && comparator.compare(key, list[j - 1]) < 0) {
         list[j] = list[j - 1];
         j--;
       }
