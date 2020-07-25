@@ -11,7 +11,10 @@ public class MyArrayList<T extends Comparable<T>> {
   private T[] list;
   private int size = 0;
 
-  /** Конструктор. */
+
+  /**
+   * Конструктор.
+   */
   public MyArrayList(final int capacity) {
     if (capacity < 0) {
       throw new IllegalArgumentException("capacity : " + capacity);
@@ -22,6 +25,7 @@ public class MyArrayList<T extends Comparable<T>> {
   public MyArrayList() {
     list = (T[]) new Comparable[DEFAULT_CAPACITY];
   }
+
 
   /** Copy constructor. */
   public MyArrayList(MyArrayList<T> arr) {
@@ -44,7 +48,7 @@ public class MyArrayList<T extends Comparable<T>> {
     size++;
   }
 
-  /**
+
    * Добавляет элемент.
    *
    * @param index позиция
@@ -60,6 +64,7 @@ public class MyArrayList<T extends Comparable<T>> {
     list[index] = item;
     size++;
   }
+
 
   /** Проверяет текущую емкость массива и увеличивает ее, если надо. */
   private void checkAndIncreaseCapacity() {
@@ -113,9 +118,16 @@ public class MyArrayList<T extends Comparable<T>> {
     list[index] = item;
   }
 
+
+  public int size() {
+    return size;
+  }
+
+
   public boolean contains(final T item) {
     return indexOf(item) > -1;
   }
+
 
   /**
    * Находит индекс элемента.
@@ -226,6 +238,7 @@ public class MyArrayList<T extends Comparable<T>> {
       }
     }
   }
+
 
   /**
    * Пузырьковая сортировка с компаратором.
