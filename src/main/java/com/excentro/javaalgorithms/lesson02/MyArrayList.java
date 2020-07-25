@@ -33,13 +33,35 @@ public class MyArrayList<T extends Comparable<T>> {
     return size;
   }
 
+  /**
+   * Добавляет элемент в список.
+   * 
+   * @param item элемент
+   */
   public void add(final T item) {
     checkAndIncreaseCapacity();
     list[size] = item;
     size++;
   }
 
-  /** Проверяет текущую емкость массива и увеличивает ее, если надо */
+  /**
+   * Добавляет элемент.
+   *
+   * @param index позиция
+   * @param item  элемент
+   */
+  public void add(final int index, final T item) {
+    checkCorrectIndex(index);
+    checkAndIncreaseCapacity();
+
+    if (size - index >= 0) {
+      System.arraycopy(list, index, list, index + 1, size - index);
+    }
+    list[index] = item;
+    size++;
+  }
+
+  /** Проверяет текущую емкость массива и увеличивает ее, если надо. */
   private void checkAndIncreaseCapacity() {
     if ((float) size / list.length > 0.75) {
       T[] newList = (T[]) new Comparable[size * 2];
@@ -52,22 +74,7 @@ public class MyArrayList<T extends Comparable<T>> {
     return list.length;
   }
 
-  /**
-   * Добавляет элемент.
-   *
-   * @param index позиция
-   * @param item элемент
-   */
-  public void add(final int index, final T item) {
-    checkCorrectIndex(index);
-    checkAndIncreaseCapacity();
 
-    if (size - index >= 0) {
-      System.arraycopy(list, index, list, index + 1, size - index);
-    }
-    list[index] = item;
-    size++;
-  }
 
   private void checkCorrectIndex(final int index) {
     if (index < 0 || index > size) {
@@ -149,16 +156,6 @@ public class MyArrayList<T extends Comparable<T>> {
     }
   }
 
-  private boolean less(final T item1, final T item2) {
-    return item1.compareTo(item2) < 0;
-  }
-
-  private void swap(final int index1, final int index2) {
-    final T temp = list[index1];
-    list[index1] = list[index2];
-    list[index2] = temp;
-  }
-
   /** Сортировка выбором. */
   public void selectionSort(final Comparator<T> comparator) {
     for (int i = 0; i < size - 1; i++) {
@@ -171,6 +168,17 @@ public class MyArrayList<T extends Comparable<T>> {
       swap(i, nimElem);
     }
   }
+
+  private boolean less(final T item1, final T item2) {
+    return item1.compareTo(item2) < 0;
+  }
+
+  private void swap(final int index1, final int index2) {
+    final T temp = list[index1];
+    list[index1] = list[index2];
+    list[index2] = temp;
+  }
+
 
   /** Сортировка вставками. */
   public void insertionSort() {
@@ -185,6 +193,8 @@ public class MyArrayList<T extends Comparable<T>> {
       list[j] = key;
     }
   }
+
+
 
   /** Сортировка вставками. */
   public void insertionSort(final Comparator<T> comparator) {
