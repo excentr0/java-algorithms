@@ -1,11 +1,22 @@
 package com.excentro.javaalgorithms.lesson03;
 
+import java.util.Comparator;
 import java.util.EmptyStackException;
 
 public class MyPriorityQueue<T extends Comparable<T>> {
   private final int DEFAULT_CAPACITY = 10;
   private T[] list;
   private int size = 0;
+  private Comparator comparator;
+
+  /** 3*. Добавить возможность передачи Компаратора в конструктор класса приоритетная очередь . */
+  public MyPriorityQueue(int capacity, Comparator comparator) {
+    this.comparator = comparator;
+    if (capacity <= 0) {
+      throw new IllegalArgumentException("capacity " + capacity);
+    }
+    list = (T[]) new Comparable[capacity];
+  }
 
   public MyPriorityQueue(int capacity) {
     if (capacity <= 0) {
@@ -39,6 +50,24 @@ public class MyPriorityQueue<T extends Comparable<T>> {
     T temp = list[index1];
     list[index1] = list[index2];
     list[index2] = temp;
+  }
+
+  /**
+   * Вставка элемента. Сортировка используя компаратор
+   *
+   * @param item элемент
+   */
+  public void insertComp(T item) {
+    if (isFull()) {
+      throw new StackOverflowError();
+    }
+    list[size] = item;
+    size++;
+    int i = size - 1;
+    while (i > 0 && comparator.compare(list[i], list[i - 1]) > 0) {
+      swap(i, i - 1);
+      i--;
+    }
   }
 
   public T remove() {
