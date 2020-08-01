@@ -1,4 +1,5 @@
 package com.excentro.javaalgorithms.lesson04;
+
 /** Реализовать LinkedQueue (очередь, на базе связанных списков.) */
 public class MyLinkedQueue<T> {
   private final MyLinkedList<T> queue = new MyLinkedList<>();
