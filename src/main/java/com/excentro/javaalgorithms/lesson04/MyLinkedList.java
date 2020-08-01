@@ -1,6 +1,8 @@
 package com.excentro.javaalgorithms.lesson04;
 
 import java.util.Iterator;
+import java.util.ListIterator;
+import java.util.NoSuchElementException;
 
 public class MyLinkedList<T> implements Iterable<T> {
   private Node first;
@@ -10,6 +12,10 @@ public class MyLinkedList<T> implements Iterable<T> {
   public MyLinkedList() {
     first = null;
     last = null;
+  }
+
+  public ListIterator<T> listIterator() {
+    return new ListIter();
   }
 
   @Override
@@ -215,8 +221,72 @@ public class MyLinkedList<T> implements Iterable<T> {
 
     @Override
     public T next() {
-      current = current.next;
-      return current.value;
+      if (hasNext()) {
+        current = current.next;
+        return current.value;
+      } else {
+        throw new NoSuchElementException("There is no next element");
+      }
+    }
+  }
+
+  /** 1. Добавить ListIterator, реализовать некоторые из его методов. */
+  private class ListIter implements ListIterator<T> {
+    Node current = new Node(null, first, first.previous);
+
+    @Override
+    public boolean hasNext() {
+      return current.next != null;
+    }
+
+    @Override
+    public T next() {
+      if (hasNext()) {
+        current = current.next;
+        return current.value;
+      } else {
+        throw new NoSuchElementException("There is no next element");
+      }
+    }
+
+    @Override
+    public boolean hasPrevious() {
+      return current.previous != null;
+    }
+
+    @Override
+    public T previous() {
+      if (hasPrevious()) {
+        current = current.previous;
+        return current.value;
+      } else {
+        throw new NoSuchElementException("There is no previous element");
+      }
+    }
+
+    @Override
+    public int nextIndex() {
+      return 0;
+    }
+
+    @Override
+    public int previousIndex() {
+      return 0;
+    }
+
+    @Override
+    public void remove() {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void set(T t) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void add(T t) {
+      throw new UnsupportedOperationException();
     }
   }
 }
