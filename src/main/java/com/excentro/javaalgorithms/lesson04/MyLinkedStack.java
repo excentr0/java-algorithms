@@ -1,7 +1,7 @@
 package com.excentro.javaalgorithms.lesson04;
 
 public class MyLinkedStack<T> {
-  private MyLinkedList<T> stack = new MyLinkedList<>();
+  private final MyLinkedList<T> stack = new MyLinkedList<>();
 
   public void push(T item) {
     stack.insertFirst(item);
