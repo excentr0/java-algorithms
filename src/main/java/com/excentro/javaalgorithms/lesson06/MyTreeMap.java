@@ -164,7 +164,7 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
   }
 
   /**
-   * Проверят, сбалансированное ли дерево.
+   * Проверяет, сбалансированное ли дерево.
    *
    * @return true, если дерево сбалансированное
    */
