@@ -36,7 +36,7 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
 
   private boolean isKeyNotNull(Key key) {
     if (key == null) {
-      throw new IllegalArgumentException("РљР»СЋС‡ РЅРµ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ null");
+      throw new IllegalArgumentException();
     }
     return true;
   }
@@ -161,5 +161,46 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
       return "";
     }
     return toString(node.left) + " " + node.key + " = " + node.value + " " + toString(node.right);
+  }
+
+  /**
+   * Проверяет, сбалансированное ли дерево.
+   *
+   * @return true, если дерево сбалансированное
+   */
+  boolean isBalanced() {
+    return isBalanced(root);
+  }
+
+  private boolean isBalanced(Node node) {
+    int leftHeight;
+    int rightHeight;
+
+    if (node == null) {
+      return true;
+    }
+
+    leftHeight = height(node.left);
+    rightHeight = height(node.right);
+
+    return (Math.abs(leftHeight - rightHeight) <= 1 && isBalanced(node.left)
+        && isBalanced(node.right));
+  }
+
+
+  /**
+   * Возвращает высоту дерева.
+   *
+   * @return высоту дерева
+   */
+  int height() {
+    return height(root);
+  }
+
+  private int height(Node node) {
+    if (node == null) {
+      return 0;
+    }
+    return 1 + Math.max(height(node.left), height(node.right));
   }
 }
