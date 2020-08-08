@@ -191,10 +191,13 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
   /**
    * Возвращает высоту дерева.
    *
-   * @param node нода
    * @return высоту дерева
    */
-  int height(Node node) {
+  int height() {
+    return height(root);
+  }
+
+  private int height(Node node) {
     if (node == null) {
       return 0;
     }
