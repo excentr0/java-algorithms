@@ -1,31 +1,33 @@
 package com.excentro.javaalgorithms.lesson07;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class BreadthFirstPath {
   private final boolean[] marked;
   private final int[] edgeTo;
   private final int source;
 
-  public BreadthFirstPath(Graph g, int source) {
+  /** Конструктор. */
+  public BreadthFirstPath(final Graph graph, final int source) {
     this.source = source;
-    marked = new boolean[g.getVertexCount()];
-    edgeTo = new int[g.getVertexCount()];
-    dfs(g, source);
+    marked = new boolean[graph.getVertexCount()];
+    edgeTo = new int[graph.getVertexCount()];
+    bfs(graph, source);
   }
 
-  private void dfs(Graph g, int v) {
+  private void bfs(final Graph g, final int v) {
     marked[v] = true;
-    for (int w : g.getAdjList(v)) {
+    for (final int w : g.getAdjList(v)) {
       if (!marked[w]) {
         edgeTo[w] = v;
-        dfs(g, w);
+        bfs(g, w);
       }
     }
   }
 
-  public LinkedList<Integer> pathTo(int v) {
-    LinkedList<Integer> stack = new LinkedList<>();
+  public List<Integer> pathTo(final int v) {
+    final LinkedList<Integer> stack = new LinkedList<>();
     if (!hasPathTo(v)) {
       return stack;
     }
@@ -37,7 +39,7 @@ public class BreadthFirstPath {
     return stack;
   }
 
-  public boolean hasPathTo(int v) {
+  public boolean hasPathTo(final int v) {
     return marked[v];
   }
 }

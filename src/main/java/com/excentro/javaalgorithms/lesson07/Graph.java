@@ -1,13 +1,19 @@
 package com.excentro.javaalgorithms.lesson07;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class Graph {
   private final int vertexCount;
   private final LinkedList<Integer>[] adjList;
   private int edgeCount;
 
-  public Graph(int vertexCount) {
+  /**
+   * Создает граф.
+   *
+   * @param vertexCount колличество вершин
+   */
+  public Graph(final int vertexCount) {
     if (vertexCount < 0) {
       throw new IllegalArgumentException("vertexCount: " + vertexCount);
     }
@@ -26,11 +32,17 @@ public class Graph {
     return edgeCount;
   }
 
-  public LinkedList<Integer> getAdjList(int vertex) {
+  public List<Integer> getAdjList(final int vertex) {
     return (LinkedList<Integer>) adjList[vertex].clone();
   }
 
-  public void addEdge(int v1, int v2) {
+  /**
+   * Добавляет вершину в граф.
+   *
+   * @param v1 откуда
+   * @param v2 куда
+   */
+  public void addEdge(final int v1, final int v2) {
     if (v1 < 0 || v2 < 0 || v1 >= vertexCount || v2 >= vertexCount) {
       throw new IllegalArgumentException();
     }
