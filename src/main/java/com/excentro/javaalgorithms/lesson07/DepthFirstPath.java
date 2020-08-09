@@ -3,11 +3,12 @@ package com.excentro.javaalgorithms.lesson07;
 import java.util.LinkedList;
 
 public class DepthFirstPath {
-  private boolean[] marked;
-  private int[] edgeTo;
-  private int source;
+  private final boolean[] marked;
+  private final int[] edgeTo;
+  private final int source;
 
-  public DepthFirstPath(Graph graph, int i) {
+  public DepthFirstPath(Graph graph, int source) {
+    this.source = source;
     marked = new boolean[graph.getVertexCount()];
     edgeTo = new int[graph.getVertexCount()];
     bfs(graph, source);
@@ -30,11 +31,6 @@ public class DepthFirstPath {
     }
   }
 
-
-  public boolean hasPathTo(int v) {
-    return marked[v];
-  }
-
   public LinkedList<Integer> pathTo(int v) {
     LinkedList<Integer> stack = new LinkedList<>();
     if (!hasPathTo(v)) {
@@ -48,4 +44,7 @@ public class DepthFirstPath {
     return stack;
   }
 
+  public boolean hasPathTo(int v) {
+    return marked[v];
+  }
 }

@@ -3,9 +3,9 @@ package com.excentro.javaalgorithms.lesson07;
 import java.util.LinkedList;
 
 public class Graph {
-  private int vertexCount;
+  private final int vertexCount;
+  private final LinkedList<Integer>[] adjList;
   private int edgeCount;
-  private LinkedList<Integer>[] adjList;
 
   public Graph(int vertexCount) {
     if (vertexCount < 0) {
@@ -41,5 +41,4 @@ public class Graph {
     }
     adjList[v2].add(v1);
   }
-
 }

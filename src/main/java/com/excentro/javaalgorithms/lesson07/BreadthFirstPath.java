@@ -3,9 +3,9 @@ package com.excentro.javaalgorithms.lesson07;
 import java.util.LinkedList;
 
 public class BreadthFirstPath {
-  private boolean[] marked;
-  private int[] edgeTo;
-  private int source;
+  private final boolean[] marked;
+  private final int[] edgeTo;
+  private final int source;
 
   public BreadthFirstPath(Graph g, int source) {
     this.source = source;
@@ -24,10 +24,6 @@ public class BreadthFirstPath {
     }
   }
 
-  public boolean hasPathTo(int v) {
-    return marked[v];
-  }
-
   public LinkedList<Integer> pathTo(int v) {
     LinkedList<Integer> stack = new LinkedList<>();
     if (!hasPathTo(v)) {
@@ -41,5 +37,7 @@ public class BreadthFirstPath {
     return stack;
   }
 
-
+  public boolean hasPathTo(int v) {
+    return marked[v];
+  }
 }
