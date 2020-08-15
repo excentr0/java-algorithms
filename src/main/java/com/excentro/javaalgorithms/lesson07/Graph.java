@@ -44,7 +44,7 @@ public class Graph {
    */
   public void addEdge(final int v1, final int v2) {
     if (v1 < 0 || v2 < 0 || v1 >= vertexCount || v2 >= vertexCount) {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("v1: " + v1 + " v2:" + v2);
     }
 
     adjList[v1].add(v2);
