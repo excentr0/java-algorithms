@@ -1,4 +1,4 @@
-package com.excentro.javaalgorithms;
+package com.excentro.javaalgorithms.lesson08;
 
 public class Car {
   String model;
