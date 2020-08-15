@@ -46,7 +46,7 @@ public class LinearProbingHashMap<Key, Value> {
   public void put(Key key, Value value) {
     checkKeyNotNull(key);
     if (size == capacity - 1) {
-      throw new RuntimeException("РњРµСЃС‚Р° РЅРµ РѕСЃС‚Р°Р»РѕСЃСЊ :(");
+      throw new RuntimeException();
     }
     int i = hash(key);
     int step = hash2(key);
