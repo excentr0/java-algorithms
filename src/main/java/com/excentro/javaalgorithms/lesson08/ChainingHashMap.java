@@ -62,6 +62,22 @@ public class ChainingHashMap<Key, Value> {
     size++;
   }
 
+  /**
+   * Удаляет элемент из списка.
+   *
+   * @param key ключ удаляемого элемента
+   */
+  public void delete(Key key) {
+    checkKeyNotNull(key);
+    int i = hash(key);
+    for (Node node : st[i]) {
+      if (key.equals(node.key)) {
+        st[i] = new LinkedList<>();
+      }
+    }
+    size--;
+  }
+
   public Value get(Key key) {
     checkKeyNotNull(key);
     int i = hash(key);
